@@ -20,6 +20,7 @@ public class ProductController {
         return products;
     }
 
+
     @GetMapping("/products/{id}")
     Product getProductById(@PathVariable("id") Long productId) {
         Product product = new Product();
