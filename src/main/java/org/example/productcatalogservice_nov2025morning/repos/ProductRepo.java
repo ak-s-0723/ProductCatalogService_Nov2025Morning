@@ -2,6 +2,7 @@ package org.example.productcatalogservice_nov2025morning.repos;
 
 import org.example.productcatalogservice_nov2025morning.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,6 +18,14 @@ public interface ProductRepo extends JpaRepository<Product,Long> {
      Product save(Product product);
 
      void deleteById(Long id);
+
+     List<Product> findProductByPriceBetween(Double low,Double high);
+
+     List<Product> findAllByOrderByPrice();
+
+     @Query("SELECT p.name from Product p where p.id=:id")
+     String getProductNameByProductId(Long id);
+
 
      //want to get product data sorted by price
 
