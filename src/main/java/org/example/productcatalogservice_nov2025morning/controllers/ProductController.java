@@ -45,10 +45,14 @@ public class ProductController {
 
     @GetMapping("{id}")
     ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long productId) {
-        if (productId < 1) {
-           throw new IllegalArgumentException("Please pass product id > 0");
+        if (productId < 0) {
+           throw new IllegalArgumentException("Invalid Id passed");
             //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if(productId == 0) {
+            throw new IllegalArgumentException("Please pass product id > 0");
         }
+
+
         Product product = productService.getProductById(productId);
         if (product == null) {
             throw new ProductNotFoundException("product not found");
