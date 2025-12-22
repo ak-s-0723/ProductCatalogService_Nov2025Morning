@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class ProductControllerTest {
@@ -50,6 +50,7 @@ class ProductControllerTest {
         assertEquals("Iphone", productDtoResponseEntity.getBody().getName());
         assertNull(productDtoResponseEntity.getBody().getCategory());
         assertNull(productDtoResponseEntity.getBody().getDescription());
+        verify(productService,times(1)).getProductById(productId);
     }
 
     @Test
@@ -62,6 +63,7 @@ class ProductControllerTest {
                 ()-> productController.getProductById(productId));
 
         assertEquals("Invalid Id passed",exception.getMessage());
+        verify(productService,times(0)).getProductById(productId);
     }
 
 }

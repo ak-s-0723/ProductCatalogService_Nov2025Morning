@@ -66,7 +66,10 @@ public class ProductController {
     @PostMapping
     ProductDto createProduct(@RequestBody
                           ProductDto productDto) {
-        Product product = productService.createProduct(from(productDto));
+
+        //return productDto;
+        Product input = from(productDto);
+        Product product = productService.createProduct(input);
         if(product !=null) {
             return from(product);
         } else {
